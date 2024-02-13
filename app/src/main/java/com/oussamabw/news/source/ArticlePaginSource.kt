@@ -10,12 +10,19 @@ import javax.inject.Singleton
 @Singleton
 class ArticlePaginSource(
     private val service: ApiService,
+    private val searchField: String,
+    private val searchInField: String,
 ) : PagingSource<Int, Article>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Article> {
         val startPosition = params.key ?: STARTING_PAGE_INDEX
         return try {
-            val response = service.getArticles(startPosition,10)
+            val response = service.getArticles(
+                page = startPosition,
+                searchField = searchField,
+                searchInField = searchInField,
+                pageSize = 10
+            )
             val articles = response.body()?.articles.orEmpty()
             LoadResult.Page(
                 data = articles,

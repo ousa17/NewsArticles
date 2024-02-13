@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,9 +23,22 @@ class ArticleViewModel @Inject constructor(
     private val _articleState = MutableStateFlow(ArticleState())
     val articleState: MutableStateFlow<ArticleState> = _articleState
 
+    fun onEvent(event: ArticleEvent) {
+        when (event) {
+            is ArticleEvent.SearchArticles -> {
+                _articleState.update {
+                    it.copy(
+                        searchField = event.searchField
+                    )
+                }
+            }
+        }
+    }
+
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val articles: Flow<PagingData<Article>> = _articleState.flatMapLatest {
-        getArticlesUseCase().flowOn(dispatcher)
+        getArticlesUseCase(it.searchField).flowOn(dispatcher)
     }
+
 }

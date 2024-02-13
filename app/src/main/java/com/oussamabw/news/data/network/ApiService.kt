@@ -9,6 +9,8 @@ interface ApiService {
     @GET("everything?domains=bbc.co.uk,techcrunch.com&apiKey=1b18650f51454f80a97facb29c252ce5")
     suspend fun getArticles(
         @Query("page") page: Int,
+        @Query("q") searchField: String,
+        @Query("searchIn") searchInField: String,
         @Query("pageSize") pageSize: Int
     ): Response<ArticleResponse>
 }

@@ -9,7 +9,7 @@ import javax.inject.Singleton
 @Singleton
 class GetArticlesUseCase @Inject constructor(private val repository: ArticleRepository) {
 
-    operator fun invoke(): Flow<PagingData<Article>> {
-        return repository.getArticles()
+    operator fun invoke(searchField: String): Flow<PagingData<Article>> {
+        return repository.getArticles(searchField)
     }
 }

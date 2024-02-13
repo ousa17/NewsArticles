@@ -1,4 +1,4 @@
-package com.oussamabw.news.ui.theme.home
+package com.oussamabw.news.ui.theme.home.compose
 
 import android.webkit.WebView
 import android.webkit.WebViewClient

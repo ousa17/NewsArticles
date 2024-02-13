@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.oussamabw.news.ui.theme.NewsTheme
-import com.oussamabw.news.ui.theme.home.ArticleList
+import com.oussamabw.news.ui.theme.home.compose.ArticleList
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
