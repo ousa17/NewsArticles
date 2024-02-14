@@ -53,6 +53,8 @@ android {
 
 dependencies {
 
+    implementation("io.coil-kt:coil-compose:2.5.0")
+
     val paging_version = "3.1.1"
 
     implementation("androidx.paging:paging-runtime:$paging_version")

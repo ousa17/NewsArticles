@@ -1,5 +1,6 @@
 package com.oussamabw.news.ui.theme.home.compose
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
@@ -35,7 +36,7 @@ private fun function(
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        LazyColumn {
+        LazyColumn(verticalArrangement = Arrangement.spacedBy(14.dp)) {
             items(lazyArticleItems) { item ->
                 item?.let { article ->
                     if (article.isBBCNews())
