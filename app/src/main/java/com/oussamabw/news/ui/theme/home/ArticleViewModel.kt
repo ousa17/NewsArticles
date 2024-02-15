@@ -32,6 +32,18 @@ class ArticleViewModel @Inject constructor(
                     )
                 }
             }
+
+            is ArticleEvent.OpenWebView -> _articleState.update {
+                it.copy(
+                    urlWebView = event.url
+                )
+            }
+
+            ArticleEvent.CloseWebView -> articleState.update {
+                it.copy(
+                    urlWebView = null
+                )
+            }
         }
     }
 

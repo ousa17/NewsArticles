@@ -2,7 +2,6 @@ package com.oussamabw.news.ui.theme.home.compose
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,6 +12,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.oussamabw.news.data.network.Article
+import com.oussamabw.news.ui.theme.home.ArticleEvent
 import com.oussamabw.news.ui.theme.home.ArticleViewModel
 
 @Composable
@@ -21,16 +21,7 @@ fun ArticleList(viewModel: ArticleViewModel) {
     val lazyArticleItems: LazyPagingItems<Article> =
         viewModel.articles.collectAsLazyPagingItems()
 
-
-    Column(content = function(viewModel, lazyArticleItems))
-}
-
-@Composable
-private fun function(
-    viewModel: ArticleViewModel,
-    lazyArticleItems: LazyPagingItems<Article>
-): @Composable() (ColumnScope.() -> Unit) =
-    {
+    Column {
 
         Inputs(viewModel = viewModel)
 
@@ -40,14 +31,14 @@ private fun function(
             items(lazyArticleItems) { item ->
                 item?.let { article ->
                     if (article.isBBCNews())
-                        BBCArticleItem(article)
+                        BBCArticleItem(article) { viewModel.onEvent(ArticleEvent.OpenWebView(article.url)) }
                     else
-                        ArticleItem(article)
-
+                        ArticleItem(article) { viewModel.onEvent(ArticleEvent.OpenWebView(article.url)) }
                 }
             }
         }
     }
+}
 
 private fun Article.isBBCNews(): Boolean = source.id == "bbc-news"
 

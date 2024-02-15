@@ -32,11 +32,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     buildFeatures {
         compose = true
@@ -54,6 +54,7 @@ android {
 dependencies {
 
     implementation("io.coil-kt:coil-compose:2.5.0")
+    testImplementation("junit:junit:4.12")
 
     val paging_version = "3.1.1"
 
@@ -109,7 +110,6 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    testImplementation("junit:junit:4.13.2")
     testImplementation("org.mockito:mockito-core:3.3.3")
     testImplementation("io.mockk:mockk:1.13.8")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
